@@ -1,0 +1,21 @@
+{
+  "label_target": "speed",
+  "label_display": "speed (rad/s)",
+  "task": "regression",
+  "source": "envelope_detrended",
+  "use_slices": true,
+  "seq_len": 2048,
+  "epochs": 80,
+  "batch_size": 64,
+  "base_ch": 64,
+  "blocks": 4,
+  "kernel": 7,
+  "dropout": 0.1,
+  "lr": 0.001,
+  "weight_decay": 0.0001,
+  "patience": 10,
+  "scheduler_patience": 2,
+  "scheduler_factor": 0.5,
+  "device": "cuda",
+  "classes": []
+}
