@@ -1,97 +1,92 @@
-# AI Rotation Analysis Toolkit 🤖🔊
+# AI Rotation Analysis Toolkit
 
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c.svg)](https://pytorch.org/)
-[![scikit-learn](https://img.shields.io/badge/scikit--learn-1.0+-f7931e.svg)](https://scikit-learn.org/)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+Audio signal processing and machine learning analysis toolkit for multi-label prediction (shape, rotation speed, material) from WAV audio files.
 
-一个完整的音频信号处理与机器学习分析工具包，用于从WAV音频文件中提取特征并训练模型进行多标签预测（形状、转速、材料）。
+## Overview
 
-## ✨ 功能特性
+This toolkit provides a complete pipeline for:
+- Audio feature extraction from WAV files (time-domain and frequency-domain features)
+- Traditional machine learning classification/regression (Random Forest, SVM, Gradient Boosting, etc.)
+- Deep learning with 1D CNN models (PyTorch-based, GPU acceleration supported)
+- Graphical user interfaces for no-code usage
+- Automated visualization of training history and prediction results
 
-- **🔊 音频特征提取**：从WAV文件中提取时域/频域特征，支持包络线分析、频谱峰值检测
-- **🤖 传统机器学习**：基于scikit-learn的分类/回归（随机森林、SVM、梯度提升等）
-- **🧠 深度学习**：基于PyTorch的1D CNN模型，支持GPU加速
-- **🖥️ 图形界面**：提供友好的GUI工具，无需编写代码即可使用
-- **📊 可视化输出**：训练历史、预测结果、混淆矩阵等自动绘图
-
-## 📁 项目结构
+## Project Structure
 
 ```
 .
-├── wav_inspector.py              # 核心音频特征提取模块
-├── wav_inspector_gui.py          # 音频特征提取GUI
-├── ml_train_predict.py           # 传统ML训练/预测CLI
-├── ml_train_predict_gui.py       # 传统ML训练/预测GUI
-├── dl_train_predict.py           # 深度学习训练/预测CLI
-├── dl_train_predict_gui.py       # 深度学习训练/预测GUI
-├── output/                       # 提取的特征数据（示例）
-├── train_models/                 # 训练好的模型保存目录
-└── recordings/                   # 原始WAV录音文件
+├── wav_inspector.py              # Core audio feature extraction module
+├── wav_inspector_gui.py          # GUI for audio feature extraction
+├── ml_train_predict.py           # Traditional ML training/prediction CLI
+├── ml_train_predict_gui.py       # GUI for traditional ML training/prediction
+├── dl_train_predict.py           # Deep learning training/prediction CLI
+├── dl_train_predict_gui.py       # GUI for deep learning training/prediction
+├── output/                       # Extracted feature data (example)
+├── train_models/                 # Directory for saved trained models
+└── recordings/                   # Original WAV recording files
 ```
 
-## 🚀 快速开始
+## Requirements
 
-### 环境安装
+- Python 3.8+
+- NumPy, SciPy, Pandas
+- Matplotlib, Seaborn
+- scikit-learn
+- PyTorch 2.0+
+- joblib
 
-```bash
-# 克隆仓库
-git clone https://github.com/yourusername/ai-rotation-analysis.git
-cd ai-rotation-analysis
+## Quick Start (GUI)
 
-# 安装依赖
-pip install numpy scipy pandas matplotlib seaborn scikit-learn joblib torch
-```
-
-### 图形界面使用（推荐）
-
-**1. 特征提取**
+### 1. Feature Extraction
 ```bash
 python3 wav_inspector_gui.py
 ```
-选择WAV文件或文件夹，提取的特征将保存为CSV格式。
+Select WAV files or folders. Extracted features will be saved as CSV files.
 
-**2. 训练模型（传统ML）**
+### 2. Model Training (Traditional ML)
 ```bash
 python3 ml_train_predict_gui.py
 ```
-选择特征数据文件夹，设置标签类型（shape/speed/material），开始训练。
+Select feature data folder, set label type (shape/speed/material), start training.
 
-**3. 训练模型（深度学习）**
+### 3. Model Training (Deep Learning)
 ```bash
 python3 dl_train_predict_gui.py
 ```
-支持GPU加速，适合大规模数据集。
+Supports GPU acceleration, suitable for large-scale datasets.
 
-## 📊 数据格式说明
+## Data Format
 
-### 样本文件夹命名规则
+### Sample Folder Naming Convention
 ```
 {shape}_{direction}_{speed}_{material}
 ```
-例如：`10_c_100_p` 表示：
-- 形状编号：10
-- 方向：c（顺时针）
-- 转速：100（对应0.3536 rad/s）
-- 材料：p（塑料）
 
-### 转速映射表
+Example: `10_c_100_p` represents:
+- Shape ID: 10
+- Direction: c (clockwise)
+- Speed: 100 (corresponds to 0.3536 rad/s)
+- Material: p (plastic)
 
-| 档位 | 周期(s) | 角速度(rad/s) |
-|------|---------|---------------|
-| 80   | 2.522   | 2.49          |
-| 100  | 1.433   | 4.38          |
-| 120  | 0.983   | 6.39          |
-| 140  | 0.733   | 8.57          |
-| 160  | 0.600   | 10.47         |
-| 180  | 0.495   | 12.70         |
-| 200  | 0.4326  | 14.52         |
-| 220  | 0.397   | 15.82         |
-| 240  | 0.3536  | 17.77         |
+### Speed Mapping Table
 
-## 🛠️ CLI命令行使用
+| Gear | Period (s) | Angular Velocity (rad/s) |
+|------|------------|--------------------------|
+| 80   | 2.522      | 2.49                     |
+| 100  | 1.433      | 4.38                     |
+| 120  | 0.983      | 6.39                     |
+| 140  | 0.733      | 8.57                     |
+| 160  | 0.600      | 10.47                    |
+| 180  | 0.495      | 12.70                    |
+| 200  | 0.4326     | 14.52                    |
+| 220  | 0.397      | 15.82                    |
+| 240  | 0.3536     | 17.77                    |
 
-### 特征提取
+Angular velocity is calculated as: $\omega = 2\pi / T$
+
+## CLI Usage
+
+### Feature Extraction
 ```bash
 python3 wav_inspector.py \
   --input /path/to/audio.wav \
@@ -99,7 +94,7 @@ python3 wav_inspector.py \
   --bandpass --channel auto --peaks 10
 ```
 
-### 传统ML训练
+### Traditional ML Training
 ```bash
 python3 ml_train_predict.py train \
   --label shape \
@@ -109,7 +104,7 @@ python3 ml_train_predict.py train \
   --out /path/to/models
 ```
 
-### 传统ML预测
+### Traditional ML Prediction
 ```bash
 python3 ml_train_predict.py predict \
   --model /path/to/model.joblib \
@@ -117,7 +112,7 @@ python3 ml_train_predict.py predict \
   --out /path/to/predictions
 ```
 
-### 深度学习训练
+### Deep Learning Training
 ```bash
 python3 dl_train_predict.py train \
   --label speed \
@@ -127,7 +122,7 @@ python3 dl_train_predict.py train \
   --epochs 80 --batch-size 32 --device cuda
 ```
 
-### 深度学习预测
+### Deep Learning Prediction
 ```bash
 python3 dl_train_predict.py predict \
   --model /path/to/best_model.pt \
@@ -136,42 +131,42 @@ python3 dl_train_predict.py predict \
   --device cuda
 ```
 
-## 📁 输出目录结构
+## Output Directory Structure
 
-### 训练输出
+### Training Output
 ```
-models/                 # 保存的模型文件
+models/                 # Saved model files
 ├── model1.joblib
 ├── model2.joblib
 └── ...
-train_report.csv        # 原始评估指标
-train_report.md         # 可读的训练报告
-train_config.json       # 训练配置
-plots/                  # 训练曲线（仅深度学习）
+train_report.csv        # Raw evaluation metrics
+train_report.md         # Human-readable training report
+train_config.json       # Training configuration
+plots/                  # Training curves (deep learning only)
 ├── train_history.png
 └── validation_curves.png
 ```
 
-### 预测输出
+### Prediction Output
 ```
-predictions.csv         # 预测结果
-test_report.md          # 测试报告
-plots/                  # 可视化结果
+predictions.csv         # Prediction results
+test_report.md          # Test report
+plots/                  # Visualizations
 ├── predict_plot.png
 └── confusion_matrix.png
 ```
 
-## 🎯 支持的标签类型
+## Supported Label Types
 
-| 标签类型 | 任务类型 | 说明 |
-|----------|----------|------|
-| `shape` | 分类 | 物体形状编号 |
-| `speed` | 回归 | 转速（rad/s）|
-| `material` | 分类 | 材料类型 |
+| Label Type | Task Type | Description |
+|------------|-----------|-------------|
+| shape      | Classification | Object shape ID |
+| speed      | Regression | Rotation speed (rad/s) |
+| material   | Classification | Material type |
 
-## 🧪 高级配置
+## Advanced Configuration
 
-### 深度学习模型调参
+### Deep Learning Model Tuning
 ```bash
 python3 dl_train_predict.py train \
   --label shape \
@@ -182,32 +177,18 @@ python3 dl_train_predict.py train \
   --scheduler-patience 5
 ```
 
-### 特征提取参数
-- **带通滤波**：50-8000 Hz
-- **包络截止频率**：可配置（默认20Hz）
-- **FFT峰值数**：可配置（默认10个）
-- **数据分片**：支持滑动窗口分片
+### Feature Extraction Parameters
+- **Bandpass filter**: 50-8000 Hz
+- **Envelope cutoff frequency**: Configurable (default 20Hz)
+- **FFT peak count**: Configurable (default 10)
+- **Data slicing**: Supports sliding window slicing
 
-## 🤝 贡献指南
+## License
 
-欢迎提交Issue和Pull Request！
+MIT License
 
-1. Fork 本仓库
-2. 创建特性分支 (`git checkout -b feature/amazing-feature`)
-3. 提交更改 (`git commit -m 'Add amazing feature'`)
-4. 推送分支 (`git push origin feature/amazing-feature`)
-5. 创建 Pull Request
+## References
 
-## 📝 许可证
-
-本项目采用 MIT 许可证 - 详见 [LICENSE](LICENSE) 文件。
-
-## 🙏 致谢
-
-- [scikit-learn](https://scikit-learn.org/) - 机器学习库
-- [PyTorch](https://pytorch.org/) - 深度学习框架
-- [SciPy](https://scipy.org/) - 科学计算库
-
----
-
-**Star 🌟 本项目如果它对您有帮助！**
+- [scikit-learn](https://scikit-learn.org/) - Machine learning library
+- [PyTorch](https://pytorch.org/) - Deep learning framework
+- [SciPy](https://scipy.org/) - Scientific computing library
